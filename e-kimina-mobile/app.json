@@ -1,0 +1,19 @@
+{
+  "expo": {
+    "name": "e-Kimina",
+    "slug": "e-kimina-mobile",
+    "version": "0.5.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "rw.ekimina.mobile"
+    },
+    "android": {
+      "package": "rw.ekimina.mobile"
+    },
+    "plugins": [
+      "expo-secure-store"
+    ]
+  }
+}

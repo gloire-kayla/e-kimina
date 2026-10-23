@@ -1,0 +1,14 @@
+{
+  "name": "e-kimina",
+  "version": "0.8.2",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "backup": "node scripts/backup.mjs"
+  }
+}
