@@ -1,4 +1,4 @@
-# e-Kimina mobile — version 0.6
+# e-Kimina mobile — version 0.6.1
 
 An Expo/React Native app for Android and iOS, sharing the website API. Phone verification is disabled. This is source code and a JavaScript development bundle, not an APK or App Store release.
 
@@ -138,3 +138,7 @@ Active chairpersons can:
 - Transfer leadership to another active member. An explicit confirmation explains that the current chairperson becomes a regular member.
 
 Status changes, invitation revocation and leadership transfer require an on-screen confirmation. Retriable commands are stored per account/group in SecureStore and reuse their request identity. If invitation creation is interrupted, Check invitations refreshes the list; revoke the uncertain invitation before making another. Invitation creation uses the existing endpoint and is not automatically retried.
+
+### Version 0.6.1 role display fix
+
+The group chooser now updates its role label immediately when an authoritative group response changes your membership role, including after leadership transfer. Switching groups no longer shows an old Chairperson label after the transfer. Server permission checks remain unchanged.

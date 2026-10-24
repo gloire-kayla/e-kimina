@@ -15,3 +15,5 @@ export class Api {
  join(token){return this.call('/api/groups/join','POST',{token});}
 }
 export function savings(state,id){return state.ledger.filter(e=>e.member===id).reduce((sum,e)=>{const kind=e.kind==='reversal'?e.originalKind:e.kind;return sum+(e.kind==='reversal'?-1:1)*e.amount*(kind==='contribution'?1:kind==='withdrawal'?-1:0);},0);}
+
+export function sessionWithGroup(session,group){if(!session)return session;const membership=group.members.find(m=>m.id===session.user.id);if(!membership)return session;return {...session,groups:session.groups.map(entry=>entry.id===group.id?{...entry,name:group.settings.name,role:membership.role}:entry)};}

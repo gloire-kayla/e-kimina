@@ -1,4 +1,4 @@
-﻿# Mobile build status — version 0.6
+﻿# Mobile build status — version 0.6.1
 
 Verified on 24 October 2026.
 
@@ -29,13 +29,20 @@ Physical Pixel 8 with Expo Go, 24 October 2026:
 - Chairperson suspended and reactivated the test member through the native forms, including reasons and confirmation. API reads confirmed each status.
 - Chairperson appointed the test member as Secretary. The native roster and API both showed the new role.
 - A second invitation was created and revoked through the phone UI. The server confirmed no pending invitations remained and retained the revocation audit entry.
+- Leadership transfer was blocked with the confirmation unchecked; the server roles and audit stayed unchanged. After confirmation, exactly one new chairperson remained and the former chairperson lost management controls.
+- The new chairperson recorded a settled exit for the former chairperson. The server preserved both member records and the audit trail, with unchanged zero financial balances; the exited member had no management/reactivation actions in the native roster.
+- The outdated group-chooser role label found during transfer testing was corrected and the Member label was verified on the phone. The API integration test now checks session metadata after a real leadership transfer.
 - Test credentials were not saved to Android's password manager. The test account was signed out after checks.
 
 Earlier emulator checks passed chairperson sign-in, Members roster, invitation creation, displayed code/expiry and Android sharing-sheet opening; the share sheet was dismissed without sending anything. The emulator repeatedly displayed “System UI isn’t responding,” including after a data-preserving reboot. The checks above were completed on the physical phone instead.
 
 Native loan applications and schedules were tested on the emulator in version 0.5. All device tests used fictional accounts and the isolated in-memory API on port 4174; no money moved and the persistent website database was not used.
 
-Still pending on-device: settled exits, leadership transfers, interrupted-action recovery after restart, chairperson loan decisions, treasurer disbursement, native receipt selection/upload/preview, cookie expiry and cache eviction. Existing API tests cover membership exits, transfers and retry identity. No iOS device has been tested.
+Still pending on-device: interrupted-action recovery after restart, chairperson loan decisions, treasurer disbursement, native receipt selection/upload/preview, cookie expiry and cache eviction. Existing API tests cover membership exits, transfers and retry identity. No iOS device has been tested.
 
 Expenses, withdrawals, report exports and password recovery still use the website. No APK/IPA, signed release, public backend or store submission exists. JavaScript development exports are not native installers and stay outside the source archive.
 
+
+## Version 0.6.1 correction
+
+Group responses now update the cached session group name and role alongside the open group. The chooser no longer retains an old Chairperson label after leadership transfer. Authority continues to be enforced by the unchanged backend. All 18 tests, syntax checking and Android/iOS development exports passed after the correction (652/654 modules).
