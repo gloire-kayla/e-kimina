@@ -1,6 +1,6 @@
 # e-Kimina website — version 0.8.2
 
-Phone verification is disabled. Register or sign in with a phone number and password, then create or join a group immediately. Existing accounts and financial records are preserved. Password recovery still uses local terminal test codes; no SMS provider is needed.
+Register or sign in with a phone number and password, then create or join a group immediately. Existing accounts and financial records are preserved. Password recovery still uses local terminal test codes; no SMS provider is needed.
 
 ## Start
 
