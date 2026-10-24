@@ -22,9 +22,20 @@ The website backend and authentication are unchanged. Phone verification remains
 
 ## Device validation
 
-Version 0.6 was launched in Expo Go on emulator-5554. Native chairperson sign-in, group selection, Members roster, invitation creation, displayed code/expiry, and Android sharing-sheet opening passed. The sheet was dismissed without sending anything. An independent API read confirmed exactly one pending invitation for the fictional recipient. Joining, role/status changes, leadership transfer and restart recovery remain pending on-device: Android repeatedly showed “System UI isn’t responding,” and the emulator was restarted without clearing data. Android eventually completed boot, but reopening Expo timed out and the same System UI freeze returned. Remaining native checks require a stable emulator or physical Android phone. Native loan applications and schedules were tested on the Android emulator in version 0.5; the user previously confirmed Expo Go launch on emulator and physical phone. No iOS device has been tested.
+Physical Pixel 8 with Expo Go, 24 October 2026:
 
-Chairperson loan decisions, treasurer disbursement, native receipts, cookie expiry and cache eviction still need full device QA. Synthetic prior device tests used the isolated in-memory API on port 4174; no money moved.
+- Invited test account signed in and joined the fictional group using the exact invitation code created on the emulator. An independent API read confirmed membership and consumption of the invitation.
+- Regular-member roster was visually inspected: names, roles and statuses were visible; phone numbers and chairperson controls were absent.
+- Chairperson suspended and reactivated the test member through the native forms, including reasons and confirmation. API reads confirmed each status.
+- Chairperson appointed the test member as Secretary. The native roster and API both showed the new role.
+- A second invitation was created and revoked through the phone UI. The server confirmed no pending invitations remained and retained the revocation audit entry.
+- Test credentials were not saved to Android's password manager. The test account was signed out after checks.
+
+Earlier emulator checks passed chairperson sign-in, Members roster, invitation creation, displayed code/expiry and Android sharing-sheet opening; the share sheet was dismissed without sending anything. The emulator repeatedly displayed “System UI isn’t responding,” including after a data-preserving reboot. The checks above were completed on the physical phone instead.
+
+Native loan applications and schedules were tested on the emulator in version 0.5. All device tests used fictional accounts and the isolated in-memory API on port 4174; no money moved and the persistent website database was not used.
+
+Still pending on-device: settled exits, leadership transfers, interrupted-action recovery after restart, chairperson loan decisions, treasurer disbursement, native receipt selection/upload/preview, cookie expiry and cache eviction. Existing API tests cover membership exits, transfers and retry identity. No iOS device has been tested.
 
 Expenses, withdrawals, report exports and password recovery still use the website. No APK/IPA, signed release, public backend or store submission exists. JavaScript development exports are not native installers and stay outside the source archive.
 
