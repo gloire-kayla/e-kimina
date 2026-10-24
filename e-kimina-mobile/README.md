@@ -54,6 +54,14 @@ The API URL is fixed at startup/build time and accepts HTTPS or loopback HTTP. T
 
 ## Validation and builds
 
+### Build an installable Android test APK
+
+With Android Studio, its SDK tools and Java installed, double-click **Build-Android-APK.cmd**. The first build downloads Gradle and native dependencies; later builds reuse the cache. It creates `build/e-kimina-0.7.0-test.apk` only after a successful build. The launcher includes both Pixel-phone and emulator architectures and bundles JavaScript, so Expo Go and Metro are not needed to run the installed APK.
+
+This APK uses the template's test signing key and is for internal testing. Keep the local website server running and forward its port with `adb -s DEVICE_ID reverse tcp:4173 tcp:4173`. Install through Android Studio/ADB or open the APK on your test phone. The default API is `http://127.0.0.1:4173`; set EXPO_PUBLIC_API_URL before building to use a different loopback test API. Changing that URL requires rebuilding. Android permits HTTP only to loopback hosts; other destinations require HTTPS.
+
+### Automated checks
+
 ```sh
 node --test tests/*.test.mjs
 npx expo export --platform all --output-dir build/full-platform --no-bytecode
