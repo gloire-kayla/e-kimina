@@ -12,7 +12,7 @@ if(!fs.existsSync(cli)){
 const sdk=process.env.ANDROID_HOME||process.env.ANDROID_SDK_ROOT||(process.env.LOCALAPPDATA&&path.join(process.env.LOCALAPPDATA,'Android','Sdk'));
 const adb=sdk&&path.join(sdk,'platform-tools','adb.exe');
 if(!adb||!fs.existsSync(adb)){console.error('Android SDK platform-tools were not found. Install them in Android Studio.');process.exit(1);}
-const api=process.env.EXPO_PUBLIC_API_URL||'http://127.0.0.1:4174';let url;try{url=new URL(api);if(!['127.0.0.1','localhost'].includes(url.hostname)||url.protocol!=='http:')throw Error();}catch{console.error('This USB test launcher requires a loopback HTTP API URL.');process.exit(1);}
+const api=process.env.EXPO_PUBLIC_API_URL||'http://127.0.0.1:4173';let url;try{url=new URL(api);if(!['127.0.0.1','localhost'].includes(url.hostname)||url.protocol!=='http:')throw Error();}catch{console.error('This USB test launcher requires a loopback HTTP API URL.');process.exit(1);}
 let output;try{output=execFileSync(adb,['devices','-l'],{encoding:'utf8'});}catch(e){console.error('ADB could not start. Run adb devices -l in your normal PowerShell terminal.');process.exit(1);}
 console.log(output);const devices=output.split(/\r?\n/).map(line=>line.trim().split(/\s+/)).filter(parts=>parts[1]==='device').map(parts=>parts[0]);
 const chosen=process.env.ANDROID_SERIAL?devices.filter(id=>id===process.env.ANDROID_SERIAL):devices;

@@ -17,7 +17,7 @@ export function createApp({database=path.resolve('data/e-kimina.sqlite'),origin=
  if(new URL(origin).origin!==origin)throw Error('APP_ORIGIN must be an origin without a trailing slash');
  if(!['127.0.0.1','localhost','[::1]'].includes(new URL(origin).hostname))throw Error('Local test verification must use a loopback origin. Real SMS delivery is not connected.');
  const store=new Store(database,{now:clock}),db=store.db,dummyHash=randomBytes(16).toString('hex')+':'+randomBytes(64).toString('hex');
- const phoneSecurity=createPhoneSecurity({db,sendSms,now:clock,secret:verificationSecret});
+ const phoneSecurity=createPhoneSecurity({db,sendSms,now:clock,secret:verificationSecret,allowUnverifiedRecovery:!requirePhoneVerification});
  const publicUser=id=>safeUser(store.user(id));
  function send(res,status,data){res.writeHead(status,{'Content-Type':'application/json; charset=utf-8'}).end(JSON.stringify(data));}
  function authenticate(req){const raw=cookie(req);if(!/^[\w-]{43}$/.test(raw))fail('unauthorized',401);const session=db.prepare('SELECT * FROM sessions WHERE token_hash=? AND expires_at>?').get(hash(raw),Date.now());if(!session)fail('unauthorized',401);return session;}
@@ -32,7 +32,7 @@ export function createApp({database=path.resolve('data/e-kimina.sqlite'),origin=
  const url=new URL(req.url,origin),p=url.pathname;
  if(!p.startsWith('/api/')){if(req.method!=='GET'&&req.method!=='HEAD')fail('notFound',404);const pathname=decodeURIComponent(p),filename=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));if(!filename.startsWith(root+path.sep))fail('notFound',404);const types={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.mjs':'text/javascript; charset=utf-8'},type=types[path.extname(filename)];if(!type)fail('notFound',404);let contents;try{contents=await readFile(filename);}catch{fail('notFound',404);}res.writeHead(200,{'Content-Type':type}).end(req.method==='HEAD'?'':contents);return;}
  const write=!['GET','HEAD'].includes(req.method);if(write&&req.headers.origin!==origin)fail('invalidOrigin',403);
- if(p==='/api/health'&&req.method==='GET'){send(res,200,{status:'ok',stage:'development',phoneVerification:'local-test',accountRecovery:'local-test',smsDelivery:'terminal'});return;}
+ if(p==='/api/health'&&req.method==='GET'){send(res,200,{status:'ok',stage:'development',phoneVerification:requirePhoneVerification?'local-test':'disabled',accountRecovery:'local-test',smsDelivery:'terminal'});return;}
  if((p==='/api/auth/register'||p==='/api/auth/login')&&req.method==='POST'){
  const data=await body(req),normalized=phone(data.phone);rateLimit(req,normalized);if(typeof data.password!=='string'||data.password.length>128)fail('invalidCredentials',401);
  if(p.endsWith('register')){const name=text(data.name,80);if(!name||!['rw','en','fr'].includes(data.language))fail('invalidInput');const digest=await passwordHash(data.password);if(db.prepare('SELECT 1 FROM users WHERE phone=?').get(normalized))fail('accountUnavailable',409);const id=crypto.randomUUID();db.prepare('INSERT INTO users(id,name,phone,password_hash,language,created_at) VALUES(?,?,?,?,?,?)').run(id,name,normalized,digest,data.language,Date.now());const csrf=newSession(res,id);send(res,201,{user:publicUser(id),csrf,groups:[]});return;}

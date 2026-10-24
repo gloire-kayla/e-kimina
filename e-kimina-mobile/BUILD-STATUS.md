@@ -1,48 +1,38 @@
-﻿# Mobile build status — version 0.6.1
+# Mobile build status — version 0.7.0
 
-Verified on 24 October 2026.
+Updated 25 October 2026. Feature implementation is complete for the agreed local-development scope. Production deployment and store distribution are separate work.
 
-## Passed
+## Automated validation
 
-- Eighteen automated tests covering sessions, group setup, payments, receipts, loans, invitations and member administration.
-- Membership API tests: phone-bound invitations, wrong-recipient rejection, regular-member phone privacy, chairperson-only creation, revocation, role updates, suspension/reactivation, settled exit, unsettled-exit rejection and leadership transfer with safe replay.
-- Invitation tests verify saving an uncertainty marker before transmitting and retaining the returned code; a failed local save prevents transmission.
-- Member form tests cover valid Rwandan phone normalization, eligible targets, reasons and deliberate confirmation of status/leadership changes.
-- Existing loan schedule parity, financial workflow and receipt privacy tests remain passing.
-- JavaScript syntax checks for App.js and Members.js passed.
-- Android and iOS JavaScript development exports passed: 652 and 654 modules respectively, about 1.1 MB each.
+- 22 mobile tests pass, including all 18 earlier tests and four tests for the remaining workflows.
+- 61 website/backend tests pass.
+- Financial integration tests cover role enforcement, external expense/withdrawal confirmations, unchanged balances during balance counts, one-time posting on retry, linked corrections and balanced journal entries.
+- Settings tests cover both interest methods, decimal rates, whole-RWF limits, prospective contribution plans and deliberate confirmation.
+- Reports enforce member privacy and leader-only exports, quote CSV values and protect formula-like text.
+- Saved actions persist before transmission and reject foreign/corrupt outboxes.
+- Recovery works for an existing unverified local-test account, exposes no code through the API, rejects replay, revokes sessions and preserves financial history and verification flags.
+- All translation keys exist in Kinyarwanda, English and French.
 
-## Implemented
+## Available native workflows
 
-Native Members screen in Kinyarwanda, English and French. Active chairpersons invite members, choose member/treasurer/secretary roles, share invitation codes through the native share sheet, revoke invitations, change roles, suspend/reactivate regular members, record settled exits and transfer leadership. All members can view the roster with the existing server privacy rules.
+Accounts and local recovery; create/join/switch groups; payments, private receipts and treasurer review; loans and schedules; invitations and member administration; savings withdrawals; group expenses; settings and contribution tracking; announcements and inbox; reconciliation; eligible linked corrections; CSV reporting; active sessions and revocation.
 
-No SMS is sent. Codes are limited to the invited phone and expire after 48 hours. The most recent invitation is retained in SecureStore until Done; server-side hashed codes cannot be recovered. Interrupted creation is not automatically retried: check the pending invitation list and revoke the uncertain invitation before making another. Role/status/leadership/revocation commands retain a request key for safe retries.
+Saved requests are scoped to account/group and retain the original key/payload on retry. Phone verification remains disabled. No SMS is sent and no money moves through e-Kimina.
 
-The website backend and authentication are unchanged. Phone verification remains disabled. Financial records are preserved by membership changes.
+## Device evidence
 
-## Device validation
+Earlier physical Pixel 8 checks passed invitation joining, roster privacy, suspension/reactivation, secretary appointment, invitation revocation, confirmed leadership transfer and settled exit with retained records. Chairperson controls disappeared after transfer and the cached group-role label updated correctly. Earlier emulator checks passed loan applications/schedules and invitation sharing-sheet opening. Test credentials were not saved to the phone password manager.
 
-Physical Pixel 8 with Expo Go, 24 October 2026:
+On 25 October, only emulator-5554 was connected. It repeatedly displayed Android System UI ANR dialogs. The USB Pixel 8 was unavailable. Reliable on-device validation of the new tools could not be completed. These screens have automated workflow validation and bundle compilation, not a claimed native device pass.
 
-- Invited test account signed in and joined the fictional group using the exact invitation code created on the emulator. An independent API read confirmed membership and consumption of the invitation.
-- Regular-member roster was visually inspected: names, roles and statuses were visible; phone numbers and chairperson controls were absent.
-- Chairperson suspended and reactivated the test member through the native forms, including reasons and confirmation. API reads confirmed each status.
-- Chairperson appointed the test member as Secretary. The native roster and API both showed the new role.
-- A second invitation was created and revoked through the phone UI. The server confirmed no pending invitations remained and retained the revocation audit entry.
-- Leadership transfer was blocked with the confirmation unchecked; the server roles and audit stayed unchanged. After confirmation, exactly one new chairperson remained and the former chairperson lost management controls.
-- The new chairperson recorded a settled exit for the former chairperson. The server preserved both member records and the audit trail, with unchanged zero financial balances; the exited member had no management/reactivation actions in the native roster.
-- The outdated group-chooser role label found during transfer testing was corrected and the Member label was verified on the phone. The API integration test now checks session metadata after a real leadership transfer.
-- Test credentials were not saved to Android's password manager. The test account was signed out after checks.
+Still requiring device QA: new tools navigation and CSV share/open; recovery UI; receipt selection/preview; treasurer loan disbursement; interrupted requests after restart; cookie expiry/cache eviction. No iOS device has been tested.
 
-Earlier emulator checks passed chairperson sign-in, Members roster, invitation creation, displayed code/expiry and Android sharing-sheet opening; the share sheet was dismissed without sending anything. The emulator repeatedly displayed “System UI isn’t responding,” including after a data-preserving reboot. The checks above were completed on the physical phone instead.
+## Distribution
 
-Native loan applications and schedules were tested on the emulator in version 0.5. All device tests used fictional accounts and the isolated in-memory API on port 4174; no money moved and the persistent website database was not used.
+Final Android and iOS development JavaScript exports passed (655/658 modules, approximately 1.1 MB each). App.js, Operations.js, Account.js and Recovery.js passed syntax checks. The combined website/mobile run passed all 83 tests with no failures or skips.
 
-Still pending on-device: interrupted-action recovery after restart, chairperson loan decisions, treasurer disbursement, native receipt selection/upload/preview, cookie expiry and cache eviction. Existing API tests cover membership exits, transfers and retry identity. No iOS device has been tested.
+Android native prebuild completed using the official Expo template. The local APK attempt could not finish: the Gradle 9.4.1 distribution download was extremely slow, and a separate official-archive download timed out after 180 seconds. The unfinished build/download processes were stopped. No APK or IPA was produced. Generated native directories and partial downloads stay outside the source snapshot. Expo's [local native build guide](https://docs.expo.dev/guides/local-app-production/) describes the remaining packaging process once dependencies are available.
 
-Expenses, withdrawals, report exports and password recovery still use the website. No APK/IPA, signed release, public backend or store submission exists. JavaScript development exports are not native installers and stay outside the source archive.
+A JavaScript export is not an APK or IPA. No public backend, production signing credentials, Play Store or App Store submission is included. This local backend is intentionally loopback-only; a physical iPhone cannot reach it from this Windows computer. The Android launcher now defaults to the persistent website API on port 4173; isolated test servers remain selectable through EXPO_PUBLIC_API_URL. Restart older backend/Expo terminals to load the updated code and API setting.
 
-
-## Version 0.6.1 correction
-
-Group responses now update the cached session group name and role alongside the open group. The chooser no longer retains an old Chairperson label after leadership transfer. Authority continues to be enforced by the unchanged backend. All 18 tests, syntax checking and Android/iOS development exports passed after the correction (652/654 modules).
+Paid withdrawal reversal, profit distribution, penalties and loan restructuring remain outside the agreed version scope. Automatic bank/Mobile Money payment processing, live SMS and background push delivery have no provider connection.

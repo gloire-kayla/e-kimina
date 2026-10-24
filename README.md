@@ -19,6 +19,6 @@ node --test e-kimina/tests/*.test.mjs
 node --test e-kimina-mobile/tests/*.test.mjs
 ```
 
-This repository contains source code and documentation. Local databases, account records, environment secrets, dependencies, generated bundles and release signing files are excluded. It is a development version; see project documentation for incomplete features and device QA.
+This repository contains source code and documentation. Local databases, account records, environment secrets, dependencies, generated bundles and release signing files are excluded. The agreed local-development workflows are implemented, with 83 automated tests passing. See project documentation for device QA and deployment limitations.
 
 This is a source backup snapshot. The original development folders remain in place on the computer. Future changes must be copied into this repository before committing and pushing another backup.

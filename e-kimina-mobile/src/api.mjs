@@ -4,6 +4,12 @@ export class Api {
  async call(path,method='GET',data,key){if(!path.startsWith('/api/'))throw Error('invalidPath');let response;try{response=await this.fetcher(this.origin+path,{method,credentials:'include',headers:{Origin:this.origin,...(data?{'Content-Type':'application/json'}:{}),...(this.csrf?{'X-CSRF-Token':this.csrf}:{}),...(key?{'Idempotency-Key':key}:{})},...(data?{body:JSON.stringify(data)}:{})});}catch{throw Error('connectionError');}let result;try{result=await response.json();}catch{throw Error('connectionError');}if(!response.ok){if(response.status===401)this.csrf='';throw Error(result.error||'serverError');}if(result.csrf)this.csrf=result.csrf;return result;}
  async uploadReceipt(group,file,bytes,key){let res;try{res=await this.fetcher(this.origin+'/api/groups/'+encodeURIComponent(group)+'/receipts',{method:'POST',credentials:'include',headers:{Origin:this.origin,'X-CSRF-Token':this.csrf,'X-File-Name':encodeURIComponent(file.name),'Content-Type':file.mime,'Idempotency-Key':key},body:bytes});}catch{throw Error('connectionError');}let result;try{result=await res.json();}catch{throw Error('connectionError');}if(!res.ok)throw Error(result.error||'serverError');return result;}
  async receipt(group,id){let res;try{res=await this.fetcher(this.origin+'/api/groups/'+encodeURIComponent(group)+'/receipts/'+encodeURIComponent(id),{credentials:'include',headers:{Origin:this.origin}});}catch{throw Error('connectionError');}if(!res.ok){let result;try{result=await res.json();}catch{}throw Error(result?.error||'serverError');}return {mime:res.headers.get('content-type'),bytes:new Uint8Array(await res.arrayBuffer())};}
+ markRead(id,ids){return this.call('/api/groups/'+encodeURIComponent(id)+'/notifications/read','POST',{ids});}
+ journal(id){return this.call('/api/groups/'+encodeURIComponent(id)+'/journal');}
+ sessions(){return this.call('/api/sessions');}
+ revokeSession(id){return this.call('/api/sessions/'+encodeURIComponent(id),'DELETE',{});}
+ recoveryRequest(phone,language){return this.call('/api/auth/recovery/request','POST',{phone,language});}
+ async recoveryReset(challengeId,code,password){const result=await this.call('/api/auth/recovery/reset','POST',{challengeId,code,password});this.csrf='';return result;}
  session(){return this.call('/api/session');}
  login(phone,password){return this.call('/api/auth/login','POST',{phone,password});}
  register(name,phone,password,language){return this.call('/api/auth/register','POST',{name,phone,password,language});}

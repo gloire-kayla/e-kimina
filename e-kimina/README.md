@@ -1,4 +1,4 @@
-# e-Kimina website — version 0.8.2
+# e-Kimina website — version 0.8.3
 
 Register or sign in with a phone number and password, then create or join a group immediately. Existing accounts and financial records are preserved. Password recovery still uses local terminal test codes; no SMS provider is needed.
 
@@ -25,7 +25,7 @@ No verification code is required. Phone numbers identify accounts and invitation
 ## Recover an account
 
 1. On the sign-in screen, select **Forgot your password?**
-2. Enter a test phone number that has already completed local confirmation.
+2. Enter the phone number of an existing test account.
 3. Request a code.
 4. Find the terminal line for that number with purpose **reset**.
 5. Enter the code, a new password of 12–128 characters, and the matching confirmation.
@@ -33,7 +33,7 @@ No verification code is required. Phone numbers identify accounts and invitation
 
 A successful reset invalidates all of that user's previous sessions. The website does not sign the user in automatically.
 
-For privacy, the recovery screen gives the same response whether an account is eligible or not. No code is generated for delivery to an unknown or not-yet-confirmed account. For accounts carried over from version 0.2, sign in with the existing password and complete local confirmation before testing recovery.
+For privacy, recovery gives the same response shape for known and unknown accounts. Existing accounts can receive a local terminal recovery code without phone verification. Unknown accounts receive no code. This does not mark any phone number as verified.
 
 ## Code rules
 
@@ -129,7 +129,7 @@ The chairperson can reverse mistaken contributions, repayments and disbursements
 
 Treasurers can record cash, Mobile Money and bank balances in Reports. The combined total is compared with recorded available funds. Differences require a note; balances are never automatically adjusted. Chairpersons and secretaries can publish group announcements. Notifications are in-app only.
 
-The website remains a local development build. Remaining work includes fuller membership/leadership management, expenses, production hosting and real phone verification, security review, and operational/privacy documentation. Loan restructuring, grace periods and penalties are not implemented. The phone app has not started.
+The website remains a local development build. Remaining work includes fuller membership/leadership management, expenses, production hosting and real phone verification, security review, and operational/privacy documentation. Loan restructuring, grace periods and penalties are not implemented. The native mobile app is available in ../e-kimina-mobile; see its BUILD-STATUS.md for validation and release limitations.
 
 ## Version 0.5: membership and leadership
 
@@ -197,3 +197,7 @@ See QA-REPORT.md for verification evidence and remaining browser/pilot checks. A
 ## Version 0.8.2: navigation and sign-in
 
 The left sidebar scrolls independently at short screen heights and in the mobile navigation drawer. Phone verification is disabled in the shipped local server and no longer appears after sign-in. Verification endpoints are disabled by default; the legacy verification implementation is retained solely for compatibility tests using an explicit server option. Recovery codes remain local to the terminal. Restart the server and refresh the browser to apply these changes.
+
+## Version 0.8.3: recovery without phone verification
+
+Existing accounts can use local terminal password-recovery codes while phone verification is disabled. The API never returns the code, successful reset revokes all sessions, and verified flags stay unchanged. Legacy verification-required mode retains its earlier eligibility checks. The full website/backend suite passes 61 tests; the mobile suite adds an end-to-end recovery check for an unverified account. Native mobile screens now cover expenses, withdrawals, settings, contribution plans, announcements, the inbox, reconciliation, corrections, CSV reports and sessions. See ../e-kimina-mobile/README.md. Earlier version sections below/above are historical records; current verification requirements are described at the top.

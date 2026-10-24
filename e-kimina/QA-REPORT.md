@@ -37,3 +37,7 @@ With Node.js 24 or newer, run `node --test tests/*.test.mjs` from this project f
 Phone verification is disabled by default as requested. New integration coverage verifies immediate group creation/access without a challenge, disabled verification endpoints, and sign-in to an existing account. Render coverage verifies an unverified account reaches its workspace. Password recovery still uses terminal test codes.
 
 The sidebar has viewport-bounded height, vertical overflow scrolling and non-shrinking children so lower navigation/profile content remains reachable on short screens. Real-browser scroll and mobile visual checks remain pending.
+
+## 25 October 2026 — mobile completion and recovery compatibility
+
+Website/backend: 61 tests passed. Mobile: 22 tests passed against this same backend. New mobile integration checks cover the complete expense and withdrawal lifecycle, balance counts, linked correction, settings and contribution plans, announcements/read state, private CSV scopes, balanced journals, session revocation and password recovery for an unverified account. Recovery never returns the code, invalidates old sessions, rejects replay and does not mark a phone verified. Physical-device evidence and remaining device limitations are tracked in ../e-kimina-mobile/BUILD-STATUS.md.

@@ -131,3 +131,7 @@ All commands share existing CSRF, authorization, transaction and idempotency pro
 ## Version 0.8.2 authentication
 
 Phone verification is not required for group access. Accounts keep verified=false until an actual legacy verification occurred; no account is falsely marked verified. The local server defaults requirePhoneVerification to false, and phone request/confirm endpoints return 404 in that mode. The legacy option is used only in compatibility tests. Recovery routes retain local terminal codes, rate limits and session revocation.
+
+## Version 0.8.3 current recovery behavior
+
+With the default requirePhoneVerification=false, existing accounts are eligible for local terminal recovery codes even if verified=false. Unknown accounts still get the generic response and no code. The API never returns codes. Reset revokes every old session and leaves verification flags unchanged. With the legacy requirePhoneVerification=true option, only locally verified accounts remain eligible. All existing expiry, replay, resend and rate-limit rules still apply. The version 0.3 eligibility and group-verification text above describes historical behavior only.
