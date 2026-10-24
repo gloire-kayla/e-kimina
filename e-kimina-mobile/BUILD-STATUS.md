@@ -1,27 +1,30 @@
-﻿# Mobile build status — version 0.5
+﻿# Mobile build status — version 0.6
 
-Verified on 23 October 2026.
+Verified on 24 October 2026.
 
 ## Passed
 
-- Fifteen automated tests covering sessions, group creation, payments, receipts, loans, permissions and retry identity.
-- Loan API integration: member applications, chairperson approval/rejection, treasurer disbursement, insufficient funds and duplicate retry protection.
-- Mobile repayment calculations match the website for flat/reducing interest, rounding, payment allocation and month-end due dates.
-- Syntax checks for App.js and Loans.js.
-- Android and iOS JavaScript development exports passed: 649 and 652 modules respectively, about 1.1 MB each.
-- Android emulator: signed in as a synthetic test member, opened the Loans screen, visually inspected repayment schedule and application form, and submitted a 1,500 RWF test application. An independent API read confirmed exactly one submitted application with the expected amount and purpose.
+- Eighteen automated tests covering sessions, group setup, payments, receipts, loans, invitations and member administration.
+- Membership API tests: phone-bound invitations, wrong-recipient rejection, regular-member phone privacy, chairperson-only creation, revocation, role updates, suspension/reactivation, settled exit, unsettled-exit rejection and leadership transfer with safe replay.
+- Invitation tests verify saving an uncertainty marker before transmitting and retaining the returned code; a failed local save prevents transmission.
+- Member form tests cover valid Rwandan phone normalization, eligible targets, reasons and deliberate confirmation of status/leadership changes.
+- Existing loan schedule parity, financial workflow and receipt privacy tests remain passing.
+- JavaScript syntax checks for App.js and Members.js passed.
+- Android and iOS JavaScript development exports passed: 652 and 654 modules respectively, about 1.1 MB each.
 
 ## Implemented
 
-Account registration/sign-in without phone verification; group creation and invitation joining; three languages; savings and dues; payment notices and receipts; treasurer payment review; loan requests, chairperson decisions, treasurer external disbursement records and repayment schedules.
+Native Members screen in Kinyarwanda, English and French. Active chairpersons invite members, choose member/treasurer/secretary roles, share invitation codes through the native share sheet, revoke invitations, change roles, suspend/reactivate regular members, record settled exits and transfer leadership. All members can view the roster with the existing server privacy rules.
 
-Loan actions persist in SecureStore before transmission, scoped to account/group. Retried actions reuse the saved request key and payload. Disbursement requires explicit confirmation that money has already been paid outside e-Kimina. The existing website API and authentication remain unchanged.
+No SMS is sent. Codes are limited to the invited phone and expire after 48 hours. The most recent invitation is retained in SecureStore until Done; server-side hashed codes cannot be recovered. Interrupted creation is not automatically retried: check the pending invitation list and revoke the uncertain invitation before making another. Role/status/leadership/revocation commands retain a request key for safe retries.
 
-## Device QA still pending
+The website backend and authentication are unchanged. Phone verification remains disabled. Financial records are preserved by membership changes.
 
-Chairperson decision and treasurer disbursement screens have API integration coverage but have not been exercised end to end on a device. App-restart loan retry recovery, native receipt selection/upload/preview, PDF opening, cookie expiry and cache eviction still need device testing. No iOS device was tested. The user previously confirmed Expo Go launch on both the Android emulator and physical phone.
+## Device validation
 
-Synthetic device testing uses the isolated in-memory API on port 4174, not the website's persistent database. No actual money was moved.
+Version 0.6 Members screens, native sharing and recovery after app restart have not been tested on a device. The local ADB service was unavailable during this step. Native loan applications and schedules were tested on the Android emulator in version 0.5; the user previously confirmed Expo Go launch on emulator and physical phone. No iOS device has been tested.
 
-Invitations, member administration, expenses, withdrawals, exports and password recovery still use the website. No APK/IPA, signed release, public backend or store submission exists. Development exports use --no-bytecode and are not native installers; generated bundles are excluded from the source archive.
+Chairperson loan decisions, treasurer disbursement, native receipts, cookie expiry and cache eviction still need full device QA. Synthetic prior device tests used the isolated in-memory API on port 4174; no money moved.
+
+Expenses, withdrawals, report exports and password recovery still use the website. No APK/IPA, signed release, public backend or store submission exists. JavaScript development exports are not native installers and stay outside the source archive.
 

@@ -11,6 +11,7 @@ export class Api {
  group(id){return this.call('/api/groups/'+encodeURIComponent(id));}
  command(id,command,data,key){return this.call('/api/groups/'+encodeURIComponent(id)+'/commands','POST',{command,data},key);}
  createGroup(data){return this.call('/api/groups','POST',data);}
+ invite(id,data){return this.call('/api/groups/'+encodeURIComponent(id)+'/invitations','POST',data);}
  join(token){return this.call('/api/groups/join','POST',{token});}
 }
 export function savings(state,id){return state.ledger.filter(e=>e.member===id).reduce((sum,e)=>{const kind=e.kind==='reversal'?e.originalKind:e.kind;return sum+(e.kind==='reversal'?-1:1)*e.amount*(kind==='contribution'?1:kind==='withdrawal'?-1:0);},0);}

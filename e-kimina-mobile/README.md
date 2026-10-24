@@ -1,4 +1,4 @@
-# e-Kimina mobile — version 0.5
+# e-Kimina mobile — version 0.6
 
 An Expo/React Native app for Android and iOS, sharing the website API. Phone verification is disabled. This is source code and a JavaScript development bundle, not an APK or App Store release.
 
@@ -11,7 +11,7 @@ An Expo/React Native app for Android and iOS, sharing the website API. Phone ver
 - Own payment records, loan records and contribution/loan deadlines.
 - Group notifications and announcements, pull to refresh and sign out.
 
-The app is a native React Native interface. It does not embed the website. Contribution and loan-repayment notices can now be submitted in the app. Loan applications, chairperson decisions, treasurer disbursements and repayment schedules are available in the Loans tab. Create a group from Your groups. Expenses, withdrawals, exports, member administration and password recovery still use the website.
+The app is a native React Native interface. It does not embed the website. Contribution and loan-repayment notices can now be submitted in the app. Loan applications, chairperson decisions, treasurer disbursements and repayment schedules are available in the Loans tab. Create a group from Your groups. Invitations and member administration are available in Members. Expenses, withdrawals, exports and password recovery still use the website.
 
 ## Shared sessions
 
@@ -112,7 +112,7 @@ The Android test launcher now uses port 8082 to avoid an observed IPv6 localhost
 
 Sign in or create an account, then tap **Shinga ikimina / Create an ikimina / Créer une ikimina** on Your groups. Enter the group name, monthly contribution, savings goal, monthly interest rate, repayment period and either flat or reducing-balance interest. The creator becomes chairperson and the group opens automatically. Existing accounts can still join by invitation. Phone verification is not required.
 
-If a network interruption leaves creation uncertain, return to Your groups and check the refreshed list before creating again. Invitations and treasurer appointments currently use the website.
+If a network interruption leaves creation uncertain, return to Your groups and check the refreshed list before creating again. Open Members to invite people and appoint a treasurer.
 
 ## Mobile loans (v0.5)
 
@@ -123,3 +123,18 @@ The chairperson sees group loans and can approve or reject submitted requests. R
 Schedules show principal, interest, installment totals and remaining balances. Dates are projected until disbursement and then use the server-recorded disbursement date. Approved repayments update outstanding amounts.
 
 Interrupted loan actions are saved in SecureStore per account/group. Retry uses the same request key and frozen payload. If the server definitively rejects the action, Refresh retrieves current records and clears that failed action. Leave an uncertain request saved and retry it rather than submitting a second application.
+
+## Members and invitations (v0.6)
+
+Open a group and tap **Abanyamuryango / Members / Membres**. Members can see the roster and current roles/statuses; the server omits phone numbers from regular-member views.
+
+Active chairpersons can:
+
+- Invite a Rwandan phone number as member, treasurer or secretary. The invitation lasts 48 hours and is restricted to that phone number. No SMS is sent. Use Share invitation code to open the native share sheet, or select/copy the code. The recipient signs in and pastes it on Your groups.
+- View and revoke pending invitations. Raw codes cannot be retrieved again from the server. The latest generated code is saved securely on this device until Done is pressed.
+- Change active members’ roles, with a reason of at least five characters.
+- Suspend or reactivate regular members. Financial records are preserved; suspended members can still submit payments.
+- Record an exit only after savings, loans, dues and pending payments are settled. Exited membership cannot be reactivated. Use website settlement workflows where necessary.
+- Transfer leadership to another active member. An explicit confirmation explains that the current chairperson becomes a regular member.
+
+Status changes, invitation revocation and leadership transfer require an on-screen confirmation. Retriable commands are stored per account/group in SecureStore and reuse their request identity. If invitation creation is interrupted, Check invitations refreshes the list; revoke the uncertain invitation before making another. Invitation creation uses the existing endpoint and is not automatically retried.
