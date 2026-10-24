@@ -21,8 +21,10 @@ console.log('The website backend and USB API forwarding are still required. This
 async function main(){
 console.log('Build log: '+logFile);
 await run(process.execPath,[cli,'prebuild','--platform','android','--no-install']);
-await run('cmd.exe',['/d','/c','gradlew.bat',':app:assembleRelease','-PreactNativeArchitectures=arm64-v8a,x86_64','--no-daemon','--max-workers=2','--console=plain','--stacktrace'],path.join(root,'android'));
-const version=JSON.parse(fs.readFileSync(path.join(root,'app.json'),'utf8')).expo.version,apk=path.join(root,'android/app/build/outputs/apk/release/app-release.apk'),dest=path.join(root,'build','e-kimina-'+version+'-test.apk');
+const gradleArgs=['/d','/c','gradlew.bat',':app:assembleRelease','-PreactNativeArchitectures=arm64-v8a,x86_64','--no-daemon','--max-workers=2','--console=plain','--stacktrace'];
+if(fs.existsSync(path.join(sdk,'cmake/4.1.2/bin/cmake.exe')))gradleArgs.push('-Pandroid.cmakeVersion=4.1.2');
+await run('cmd.exe',gradleArgs,path.join(root,'android'));
+const version=JSON.parse(fs.readFileSync(path.join(root,'app.json'),'utf8')).expo.version,apk=path.join(root,'build/native/app/outputs/apk/release/app-release.apk'),dest=path.join(root,'build','e-kimina-'+version+'-test.apk');
 if(!fs.existsSync(apk))throw Error('Gradle finished without the expected APK.');
 fs.mkdirSync(path.dirname(dest),{recursive:true});fs.copyFileSync(apk,dest);
 console.log('APK ready: '+dest);

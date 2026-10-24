@@ -14,7 +14,8 @@
     },
     "plugins": [
       "expo-secure-store",
-      "./plugins/with-loopback-network.cjs"
+      "./plugins/with-loopback-network.cjs",
+      "./plugins/with-short-android-build.cjs"
     ]
   }
 }
