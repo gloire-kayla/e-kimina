@@ -22,7 +22,7 @@ The website backend and authentication are unchanged. Phone verification remains
 
 ## Device validation
 
-Version 0.6 Members screens, native sharing and recovery after app restart have not been tested on a device. The local ADB service was unavailable during this step. Native loan applications and schedules were tested on the Android emulator in version 0.5; the user previously confirmed Expo Go launch on emulator and physical phone. No iOS device has been tested.
+Version 0.6 was launched in Expo Go on emulator-5554. Native chairperson sign-in, group selection, Members roster, invitation creation, displayed code/expiry, and Android sharing-sheet opening passed. The sheet was dismissed without sending anything. An independent API read confirmed exactly one pending invitation for the fictional recipient. Joining, role/status changes, leadership transfer and restart recovery remain pending on-device: Android repeatedly showed “System UI isn’t responding,” and the emulator was restarted without clearing data. The activity service was not ready during the subsequent boot wait. Native loan applications and schedules were tested on the Android emulator in version 0.5; the user previously confirmed Expo Go launch on emulator and physical phone. No iOS device has been tested.
 
 Chairperson loan decisions, treasurer disbursement, native receipts, cookie expiry and cache eviction still need full device QA. Synthetic prior device tests used the isolated in-memory API on port 4174; no money moved.
 
