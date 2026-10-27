@@ -52,6 +52,10 @@ The app uses HttpOnly session cookies, Origin validation and CSRF protection. Th
 
 The API URL is fixed at startup/build time and accepts HTTPS or loopback HTTP. This backend intentionally remains local-only. A public production backend is a separate deployment task.
 
+## App icon
+
+The branded icon is `assets/icon.png`: gold hands supporting a sprout on deep green, generated with the built-in imagegen tool. Expo uses it for the standard icon and Android adaptive foreground. The launcher-inset plugin preserves the full mark inside Android masks. The generation prompt is recorded in `assets/ICON.md`. Rebuild and reinstall the APK after changing the icon; Metro reload alone does not update launcher artwork.
+
 ## Validation and builds
 
 ### Build an installable Android test APK
