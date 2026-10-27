@@ -1,6 +1,6 @@
 # Mobile build status — version 0.7.0
 
-Updated 25 October 2026. Feature implementation is complete for the agreed local-development scope. Production deployment and store distribution are separate work.
+Updated 27 October 2026. Feature implementation is complete for the agreed local-development scope. Production deployment and store distribution are separate work.
 
 ## Automated validation
 
@@ -33,11 +33,15 @@ Final Android and iOS development JavaScript exports passed (655/658 modules, ap
 
 Android native prebuild completed using the official Expo template. On 25 October the Gradle 9.4.1 distribution download was completed with resumable chunks and verified against its official SHA-256 checksum. The archive is cached for reuse. The APK now has a reproducible Expo configuration plugin permitting local HTTP only for loopback hosts; the generated manifest and network policy were checked.
 
-Compilation in the agent's execution environment fails while generating Gradle classes: Java raises AccessDeniedException in WindowsLinkSupport.getRealPath for the readable gradle-classloaders-9.4.1.jar. Standalone Java 17 and Java 25 probes reproduce it, and a specific folder-access grant did not resolve it. Build-Android-APK.cmd therefore runs in the user's normal Windows session, reuses the download, and saves build/android-build.log for diagnosis.
+The restricted execution environment reproduces a Java path-access error; the reviewed normal Windows build can compile successfully past that point. No system-wide permissions or TLS settings were relaxed.
 
-The normal-session build compiled the React Native and Expo build plugins, installed Java 17 and NDK 27.1.12297006, and reached native release compilation (46 executed tasks). It then failed starting Expo's generated prefab_command.bat: its physical pnpm path was 266 characters long, although the file existed. A reproducible Expo plugin now moves subproject build directories to build/native and CMake staging to build/cxx, outside each module's temporary build directory. The equivalent command path is 172 characters. The launcher uses installed CMake 4.1.2 when available and copies the resulting APK from the new output directory. The short-path configuration passed source checks and native project generation; the next normal-session compilation remains pending.
+On 27 October the native-path plugin was corrected to register its Android DSL callbacks before React's root plugin evaluates the app, and to apply CMake staging through androidComponents.finalizeDsl. Output directories include an android path segment required by Expo autolinking. Module outputs now use build/android/native and CMake staging uses build/android/cxx; generated prefab command paths measure 177?180 characters instead of 266.
 
-No APK or IPA has been produced yet. Generated native directories, downloads, build logs and signing files stay outside the source snapshot. Expo's [local native build guide](https://docs.expo.dev/guides/local-app-production/) and Android's [CMake staging API](https://developer.android.com/reference/tools/gradle-api/9.3/com/android/build/api/dsl/Cmake) describe the build configuration.
+The corrected build passed native C++ compilation for ARM64 and x86_64, generated the embedded Android JavaScript bundle (656 modules), and passed release lint and signing validation. Slow Google Maven downloads were completed from the official repository and checked against Google's published checksums. The release build completed successfully (278 actionable tasks). ADB reported no connected device on 27 October; installation and runtime testing of this APK remain pending.
+
+Android test APK: `build/e-kimina-0.7.0-test.apk` (39,252,066 bytes). Android apksigner verification passed with APK Signature Scheme v2 and the template Android Debug certificate. Package identity is `rw.ekimina.mobile`, version 0.7.0/code 1, minimum Android API 24, target API 36. The APK contains ARM64 and x86_64 native libraries and a 1,497,768-byte embedded JavaScript bundle. The packaged network policy was inspected and permits HTTP only to loopback hosts.
+
+APK SHA-256: `1676fcdea92225d319593efb91770d52eee6896a421b99824084629540444162`. A matching `.apk.sha256` sidecar is beside the installer. No IPA has been produced. Generated native directories, downloads, build logs and signing files stay outside the source snapshot. Expo's [local native build guide](https://docs.expo.dev/guides/local-app-production/) and Android's [CMake staging API](https://developer.android.com/reference/tools/gradle-api/9.3/com/android/build/api/dsl/Cmake) describe the build configuration.
 
 A JavaScript export is not an APK or IPA. No public backend, production signing credentials, Play Store or App Store submission is included. This local backend is intentionally loopback-only; a physical iPhone cannot reach it from this Windows computer. The Android launcher now defaults to the persistent website API on port 4173; isolated test servers remain selectable through EXPO_PUBLIC_API_URL. Restart older backend/Expo terminals to load the updated code and API setting.
 
