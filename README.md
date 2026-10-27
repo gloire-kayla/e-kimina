@@ -5,7 +5,9 @@ A savings and lending platform for Rwandan ibimina, with a website and a native 
 ## Documentation and free demonstration
 
 - [Documentation folder](documentation/README.md): user guide, demo access, architecture, test evidence and recording walkthrough.
-- [Free demo source](docs/index.html): fictional data in browser storage; no backend or real login. [Public demo](https://gloire-kayla.github.io/e-kimina/) deployed successfully through GitHub Pages; direct page access from the agent network could not yet be verified.
+- [Free demo source](docs/index.html): fictional data in browser storage; no backend or real login. [Public demo](https://gloire-kayla.github.io/e-kimina/) deployed successfully through GitHub Pages; the user confirmed the demo opens in Chrome.
+
+- [Completed demonstration video](documentation/video/README.md): 2:49 WebM, below the three-minute limit.
 
 ## Projects
 

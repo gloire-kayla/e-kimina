@@ -1,6 +1,6 @@
 # Recording script: target 2 minutes 30 seconds
 
-Status: no recording file has been produced yet. Use Screencastify in Chrome and record only the demo tab. Leave microphone and webcam off unless you want to narrate. Do not record private tabs, passwords or real accounts. Save a WebM or another accepted video format under documentation/video after checking duration and playback; keep the recording under 3 minutes.
+Status: a completed 2:48.87 WebM is available in [video/](video/README.md). The table below remains a suggested recording plan; the completed recording is the user?s own walkthrough shortened to meet the limit. Use Screencastify in Chrome and record only the demo tab. Leave microphone and webcam off unless you want to narrate. Do not record private tabs, passwords or real accounts. Save a WebM or another accepted video format under documentation/video after checking duration and playback; keep the recording under 3 minutes.
 
 | Time | Action | Explain or show |
 | --- | --- | --- |

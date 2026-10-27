@@ -7,6 +7,7 @@ Start here. Updated 27 October 2026.
 - [Architecture and setup](TECHNICAL.md)
 - [Testing evidence and limitations](TESTING.md)
 - [Deployment status](DEPLOYMENT.md)
+- [Completed demonstration video: 2:49 WebM](video/README.md)
 - [Screen-recording walkthrough](RECORDING-SCRIPT.md)
 
 ## Project
@@ -21,4 +22,4 @@ The full application in ../e-kimina and ../e-kimina-mobile has a Node.js/SQLite 
 
 ## Submission status
 
-This folder provides technical and user documentation. Dataset research, NISR analysis, references and methodology, national-priority alignment and the final submission narrative remain separate work, as requested. No NISR dataset has been integrated. No demonstration recording has been completed yet. Do not describe this package as a complete hackathon submission.
+This folder provides technical and user documentation. Dataset research, NISR analysis, references and methodology, national-priority alignment and the final submission narrative remain separate work, as requested. No NISR dataset has been integrated. A user-recorded walkthrough has been shortened to 2:48.87, checked, and saved under video/. Do not describe this package as a complete hackathon submission.
