@@ -62,7 +62,7 @@ This APK uses the template's test signing key and is for internal testing. Keep 
 
 The generated Android project keeps module outputs under `build/android/native` and CMake staging under `build/android/cxx`, avoiding Windows command-path limits with pnpm. The launcher reuses the prepared Gradle cache on this computer and uses installed CMake 4.1.2 when available. Build output is mirrored to `build/android-build.log`; keep the window open while it compiles.
 
-The 27 October 2026 build completed and its APK signature, package identity, embedded bundle and two architectures were verified. The installer is `build/e-kimina-0.7.0-test.apk`; on-device installation testing remains pending because no Android device was connected.
+The 27 October 2026 build completed and its APK signature, package identity, embedded bundle and two architectures were verified. The installer is `build/e-kimina-0.7.0-test.apk`; installation, cold launch, sign-in, dashboard, CSV share-sheet opening, session restoration and group creation passed on the physical Pixel 8 using fictional test data. See BUILD-STATUS.md for the remaining device checks.
 
 ### Automated checks
 

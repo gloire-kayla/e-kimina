@@ -25,7 +25,9 @@ Earlier physical Pixel 8 checks passed invitation joining, roster privacy, suspe
 
 On 25 October, only emulator-5554 was connected. It repeatedly displayed Android System UI ANR dialogs. The USB Pixel 8 was unavailable. Reliable on-device validation of the new tools could not be completed. These screens have automated workflow validation and bundle compilation, not a claimed native device pass.
 
-Still requiring device QA: new tools navigation and CSV share/open; recovery UI; receipt selection/preview; treasurer loan disbursement; interrupted requests after restart; cookie expiry/cache eviction. No iOS device has been tested.
+On 27 October the signed internal APK was installed successfully on the physical Pixel 8 (3B170DLJH000CY). Cold launch, English sign-in, group selection/dashboard with the expected 100,000 RWF test funds, More tools navigation, CSV export opening the Android share sheet, saved session restoration after force-stop/relaunch, and creation of a new group using reducing-balance interest passed. No report was sent to another person. Tests used an isolated in-memory backend and fictional accounts. The QA account was signed out, the test server was stopped, and USB port 4173 was restored to the persistent website backend. This is a startup/workflow smoke test, not a complete pass for all financial and recovery flows.
+
+Still requiring device QA: CSV opening in a receiving app; recovery UI; receipt selection/preview; treasurer loan disbursement; interrupted requests after restart; cookie expiry/cache eviction. No iOS device has been tested.
 
 ## Distribution
 
@@ -37,7 +39,7 @@ The restricted execution environment reproduces a Java path-access error; the re
 
 On 27 October the native-path plugin was corrected to register its Android DSL callbacks before React's root plugin evaluates the app, and to apply CMake staging through androidComponents.finalizeDsl. Output directories include an android path segment required by Expo autolinking. Module outputs now use build/android/native and CMake staging uses build/android/cxx; generated prefab command paths measure 177?180 characters instead of 266.
 
-The corrected build passed native C++ compilation for ARM64 and x86_64, generated the embedded Android JavaScript bundle (656 modules), and passed release lint and signing validation. Slow Google Maven downloads were completed from the official repository and checked against Google's published checksums. The release build completed successfully (278 actionable tasks). ADB reported no connected device on 27 October; installation and runtime testing of this APK remain pending.
+The corrected build passed native C++ compilation for ARM64 and x86_64, generated the embedded Android JavaScript bundle (656 modules), and passed release lint and signing validation. Slow Google Maven downloads were completed from the official repository and checked against Google's published checksums. The release build completed successfully (278 actionable tasks). The physical Pixel 8 was subsequently connected; installation and the smoke checks listed above passed.
 
 Android test APK: `build/e-kimina-0.7.0-test.apk` (39,252,066 bytes). Android apksigner verification passed with APK Signature Scheme v2 and the template Android Debug certificate. Package identity is `rw.ekimina.mobile`, version 0.7.0/code 1, minimum Android API 24, target API 36. The APK contains ARM64 and x86_64 native libraries and a 1,497,768-byte embedded JavaScript bundle. The packaged network policy was inspected and permits HTTP only to loopback hosts.
 
