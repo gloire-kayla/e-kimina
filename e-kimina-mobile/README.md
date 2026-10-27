@@ -84,3 +84,7 @@ Source archives and GitHub exclude dependencies, databases, caches, generated na
 ## Online beta preparation
 
 The build launcher now accepts a hosted HTTPS API origin. The current installed APK still points to the local backend; no online APK has been produced. The actual hosting URL must pass deployment acceptance checks before rebuilding. Remote-origin builds explain that SMS and password recovery are unavailable. See the website project?s DEPLOYMENT.md for hosting setup and provider limitations.
+
+## Visible project documentation
+
+[Open the documentation folder on GitHub](https://github.com/gloire-kayla/e-kimina/tree/main/documentation) for the user guide, fictional demo profiles, architecture, test evidence and recording script. The [free public simulation](https://gloire-kayla.github.io/e-kimina/) is a separate browser-only demo, not the installed mobile backend.

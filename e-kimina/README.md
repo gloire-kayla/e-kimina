@@ -205,3 +205,7 @@ Existing accounts can use local terminal password-recovery codes while phone ver
 ## Online beta preparation
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) and the draft [Render configuration](render.yaml). Public mode must be explicitly enabled with an HTTPS origin and persistent database storage. Terminal recovery is disabled online. Local mode stays the default. No hosting resources have been created and no local database is uploaded automatically.
+
+## Visible project documentation
+
+[Open the documentation folder on GitHub](https://github.com/gloire-kayla/e-kimina/tree/main/documentation) for the user guide, fictional demo profiles, architecture, test evidence and recording script. The [free public simulation](https://gloire-kayla.github.io/e-kimina/) is a separate browser-only demo, not the installed mobile backend.

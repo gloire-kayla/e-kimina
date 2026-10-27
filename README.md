@@ -5,7 +5,7 @@ A savings and lending platform for Rwandan ibimina, with a website and a native 
 ## Documentation and free demonstration
 
 - [Documentation folder](documentation/README.md): user guide, demo access, architecture, test evidence and recording walkthrough.
-- [Free demo source](docs/index.html): fictional data in browser storage; no backend or real login. Public deployment is being prepared.
+- [Free demo source](docs/index.html): fictional data in browser storage; no backend or real login. [Public demo](https://gloire-kayla.github.io/e-kimina/) deployed successfully through GitHub Pages; direct page access from the agent network could not yet be verified.
 
 ## Projects
 
@@ -24,6 +24,6 @@ node --test e-kimina/tests/*.test.mjs
 node --test e-kimina-mobile/tests/*.test.mjs
 ```
 
-This repository contains source code and documentation. Local databases, account records, environment secrets, dependencies, generated bundles and release signing files are excluded. The agreed local-development workflows are implemented, with 83 automated tests passing. See project documentation for device QA and deployment limitations.
+This repository contains source code and documentation. Local databases, account records, environment secrets, dependencies, generated bundles and release signing files are excluded. The agreed local-development workflows are implemented, with 87 automated tests passing. See project documentation for device QA and deployment limitations.
 
 This is a source backup snapshot. The original development folders remain in place on the computer. Future changes must be copied into this repository before committing and pushing another backup.
