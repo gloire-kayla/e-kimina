@@ -2,6 +2,11 @@
 
 A savings and lending platform for Rwandan ibimina, with a website and a native Android/iOS app. Available in Kinyarwanda, English and French.
 
+## Documentation and free demonstration
+
+- [Documentation folder](documentation/README.md): user guide, demo access, architecture, test evidence and recording walkthrough.
+- [Free demo source](docs/index.html): fictional data in browser storage; no backend or real login. Public deployment is being prepared.
+
 ## Projects
 
 - [Website](e-kimina/README.md): Node.js backend, SQLite storage and browser application.
