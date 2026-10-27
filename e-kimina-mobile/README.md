@@ -64,6 +64,8 @@ With Android Studio, its SDK tools and Java installed, double-click **Build-Andr
 
 This APK uses the template's test signing key and is for internal testing. Keep the local website server running and forward its port with `adb -s DEVICE_ID reverse tcp:4173 tcp:4173`. Install through Android Studio/ADB or open the APK on your test phone. The default API is `http://127.0.0.1:4173`; set EXPO_PUBLIC_API_URL before building to use a different loopback test API. Changing that URL requires rebuilding. Android permits HTTP only to loopback hosts; other destinations require HTTPS.
 
+If the installed app says it cannot reach the server, start the website backend and double-click **Connect-Android-APK.cmd**. This checks the backend and restores USB forwarding on connected authorized Android devices. Run it again after reconnecting USB or restarting the phone. This shortcut does not require Expo or a rebuild.
+
 The generated Android project keeps module outputs under `build/android/native` and CMake staging under `build/android/cxx`, avoiding Windows command-path limits with pnpm. The launcher reuses the prepared Gradle cache on this computer and uses installed CMake 4.1.2 when available. Build output is mirrored to `build/android-build.log`; keep the window open while it compiles.
 
 The 27 October 2026 build completed and its APK signature, package identity, embedded bundle and two architectures were verified. The installer is `build/e-kimina-0.7.0-test.apk`; installation, cold launch, sign-in, dashboard, CSV share-sheet opening, session restoration and group creation passed on the physical Pixel 8 using fictional test data. See BUILD-STATUS.md for the remaining device checks.
