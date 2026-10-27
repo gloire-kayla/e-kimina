@@ -8,7 +8,7 @@ const java=process.env.JAVA_HOME||path.join(process.env.ProgramFiles||'C:/Progra
 if(!fs.existsSync(path.join(sdk,'platform-tools/adb.exe')))fail('Install Android SDK platform-tools in Android Studio.');
 if(!fs.existsSync(path.join(java,'bin/java.exe')))fail('Set JAVA_HOME to Android Studio\'s jbr folder.');
 const api=process.env.EXPO_PUBLIC_API_URL||'http://127.0.0.1:4173';let url;
-try{url=new URL(api);if(url.protocol!=='http:'||!['127.0.0.1','localhost'].includes(url.hostname)||url.pathname!=='/'||url.username||url.password||url.search||url.hash)throw Error();}catch{fail('The local test APK requires a loopback HTTP API URL.');}
+try{url=new URL(api);if(!(url.protocol==='https:'||(url.protocol==='http:'&&['127.0.0.1','localhost'].includes(url.hostname)))||url.pathname!=='/'||url.username||url.password||url.search||url.hash)throw Error();}catch{fail('Use an HTTPS API origin or a loopback HTTP API origin.');}
 const preparedCache=path.resolve(root,'../../work/gradle-home'),cache=fs.existsSync(path.join(preparedCache,'wrapper/dists/gradle-9.4.1-bin'))?preparedCache:path.join(root,'build/gradle-home');
 const existingCache=path.join(process.env.USERPROFILE||'','.gradle/caches');
 const env={...process.env,JAVA_HOME:java,ANDROID_HOME:sdk,GRADLE_USER_HOME:process.env.GRADLE_USER_HOME||cache,ANDROID_USER_HOME:process.env.ANDROID_USER_HOME||path.join(root,'build/android-home'),EXPO_PUBLIC_API_URL:url.origin,EXPO_NO_TELEMETRY:'1',PATH:path.dirname(process.execPath)+path.delimiter+process.env.PATH};
@@ -17,8 +17,9 @@ fs.mkdirSync(path.join(root,'build'),{recursive:true});
 const logFile=path.join(root,'build/android-build.log'),log=fs.createWriteStream(logFile);
 function run(command,args,cwd=root){return new Promise((resolve,reject)=>{const child=spawn(command,args,{cwd,env,stdio:['ignore','pipe','pipe']});for(const [stream,out]of [[child.stdout,process.stdout],[child.stderr,process.stderr]])stream.on('data',chunk=>{out.write(chunk);log.write(chunk);});child.on('error',reject);child.on('exit',code=>code===0?resolve():reject(Error('Build did not complete (exit '+code+'). Keep the cache and check '+logFile)));});}
 console.log('Building an internal test APK using '+url.origin+'. No Expo Go or Metro is needed after installation.');
-console.log('The website backend and USB API forwarding are still required. This uses the template test signing key, not a store release key.');
+console.log('This uses the template test signing key, not a store release key.');
 async function main(){
+console.log(url.protocol==='https:'?'HTTPS backend selected. USB API forwarding is not required.':'Local backend selected. USB API forwarding is required.');
 console.log('Build log: '+logFile);
 await run(process.execPath,[cli,'prebuild','--platform','android','--no-install']);
 const gradleArgs=['/d','/c','gradlew.bat',':app:assembleRelease','-PreactNativeArchitectures=arm64-v8a,x86_64','--no-daemon','--max-workers=2','--console=plain','--stacktrace'];

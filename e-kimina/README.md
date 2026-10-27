@@ -201,3 +201,7 @@ The left sidebar scrolls independently at short screen heights and in the mobile
 ## Version 0.8.3: recovery without phone verification
 
 Existing accounts can use local terminal password-recovery codes while phone verification is disabled. The API never returns the code, successful reset revokes all sessions, and verified flags stay unchanged. Legacy verification-required mode retains its earlier eligibility checks. The full website/backend suite passes 61 tests; the mobile suite adds an end-to-end recovery check for an unverified account. Native mobile screens now cover expenses, withdrawals, settings, contribution plans, announcements, the inbox, reconciliation, corrections, CSV reports and sessions. See ../e-kimina-mobile/README.md. Earlier version sections below/above are historical records; current verification requirements are described at the top.
+
+## Online beta preparation
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) and the draft [Render configuration](render.yaml). Public mode must be explicitly enabled with an HTTPS origin and persistent database storage. Terminal recovery is disabled online. Local mode stays the default. No hosting resources have been created and no local database is uploaded automatically.

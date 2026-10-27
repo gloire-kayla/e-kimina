@@ -41,3 +41,7 @@ The sidebar has viewport-bounded height, vertical overflow scrolling and non-shr
 ## 25 October 2026 — mobile completion and recovery compatibility
 
 Website/backend: 61 tests passed. Mobile: 22 tests passed against this same backend. New mobile integration checks cover the complete expense and withdrawal lifecycle, balance counts, linked correction, settings and contribution plans, announcements/read state, private CSV scopes, balanced journals, session revocation and password recovery for an unverified account. Recovery never returns the code, invalidates old sessions, rejects replay and does not mark a phone verified. Physical-device evidence and remaining device limitations are tracked in ../e-kimina-mobile/BUILD-STATUS.md.
+
+## Online preparation: 27 October 2026
+
+65 backend tests passed; 22 mobile tests passed. New deployment tests verify explicit online opt-in, HTTPS/Secure-cookie enforcement, Host/Origin/CSRF rejection, no online terminal-code delivery and spoof-resistant configured proxy rate limiting. Frontend syntax checks and Android/iOS JavaScript exports passed using a non-live placeholder HTTPS origin. Deployment has not occurred; live HTTPS, provider proxy configuration, persistent storage/backup restoration and unplugged-phone acceptance remain unverified.

@@ -1,0 +1,30 @@
+# Draft paid pilot configuration. Review the service/disk cost before applying.
+# Blueprint path in the backup repository: e-kimina/render.yaml
+services:
+  - type: web
+    name: e-kimina
+    runtime: node
+    rootDir: e-kimina
+    plan: starter
+    numInstances: 1
+    autoDeployTrigger: 'off'
+    buildCommand: npm test
+    startCommand: node server.mjs
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+      - key: NODE_ENV
+        value: production
+      - key: DEPLOYMENT_MODE
+        value: public-beta
+      - key: HOST
+        value: 0.0.0.0
+      - key: DATABASE_PATH
+        value: /var/data/e-kimina.sqlite
+      - key: TRUSTED_PROXY_HOPS
+        value: '0'
+    disk:
+      name: e-kimina-data
+      mountPath: /var/data
+      sizeGB: 1

@@ -62,7 +62,7 @@ The branded icon is `assets/icon.png`: gold hands supporting a sprout on deep gr
 
 With Android Studio, its SDK tools and Java installed, double-click **Build-Android-APK.cmd**. The first build downloads Gradle and native dependencies; later builds reuse the cache. It creates `build/e-kimina-0.7.0-test.apk` only after a successful build. The launcher includes both Pixel-phone and emulator architectures and bundles JavaScript, so Expo Go and Metro are not needed to run the installed APK.
 
-This APK uses the template's test signing key and is for internal testing. Keep the local website server running and forward its port with `adb -s DEVICE_ID reverse tcp:4173 tcp:4173`. Install through Android Studio/ADB or open the APK on your test phone. The default API is `http://127.0.0.1:4173`; set EXPO_PUBLIC_API_URL before building to use a different loopback test API. Changing that URL requires rebuilding. Android permits HTTP only to loopback hosts; other destinations require HTTPS.
+This APK uses the template's test signing key and is for internal testing. Keep the local website server running and forward its port with `adb -s DEVICE_ID reverse tcp:4173 tcp:4173`. Install through Android Studio/ADB or open the APK on your test phone. The default API is `http://127.0.0.1:4173`; set EXPO_PUBLIC_API_URL before building to use a different loopback test API or a verified hosted HTTPS origin. HTTPS builds do not need USB API forwarding. Changing that URL requires rebuilding. Android permits HTTP only to loopback hosts; other destinations require HTTPS.
 
 If the installed app says it cannot reach the server, start the website backend and double-click **Connect-Android-APK.cmd**. This checks the backend and restores USB forwarding on connected authorized Android devices. Run it again after reconnecting USB or restarting the phone. This shortcut does not require Expo or a rebuild.
 
@@ -80,3 +80,7 @@ npx expo export --platform all --output-dir build/full-platform --no-bytecode
 See [BUILD-STATUS.md](BUILD-STATUS.md) for exact test results, device evidence and installer status. JavaScript exports are not APK/IPA installers. iOS native builds/device testing require a Mac with Xcode or a configured build service; neither an App Store nor Play Store release is included.
 
 Source archives and GitHub exclude dependencies, databases, caches, generated native/build directories and signing secrets. Source code backup does not back up account or financial data; use the website's database backup command separately.
+
+## Online beta preparation
+
+The build launcher now accepts a hosted HTTPS API origin. The current installed APK still points to the local backend; no online APK has been produced. The actual hosting URL must pass deployment acceptance checks before rebuilding. Remote-origin builds explain that SMS and password recovery are unavailable. See the website project?s DEPLOYMENT.md for hosting setup and provider limitations.
