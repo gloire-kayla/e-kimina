@@ -1,0 +1,33 @@
+{
+  "source": "https://statistics.gov.rw/sites/default/files/documents/2024-09/Rwanda-Finscope-2024-Report_compressed.pdf",
+  "figure": 35,
+  "printed_page": 45,
+  "input_sha256": "e60880a412224d7bdeb62648ed20d2a2369bc800ab97b85acc2a4f021c42f49b",
+  "method": "2024 percentage minus 2020 percentage; published rounded estimates",
+  "results": [
+    {
+      "channel": "Savings groups",
+      "2020_percent": 55,
+      "2024_percent": 52,
+      "change_percentage_points": -3
+    },
+    {
+      "channel": "Mobile money",
+      "2020_percent": 22,
+      "2024_percent": 20,
+      "change_percentage_points": -2
+    },
+    {
+      "channel": "Commercial banks",
+      "2020_percent": 21,
+      "2024_percent": 18,
+      "change_percentage_points": -3
+    },
+    {
+      "channel": "Umurenge SACCO",
+      "2020_percent": 22,
+      "2024_percent": 14,
+      "change_percentage_points": -8
+    }
+  ]
+}

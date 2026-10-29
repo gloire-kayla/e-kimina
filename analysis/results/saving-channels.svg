@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="530" viewBox="0 0 1000 530" role="img" aria-labelledby="title desc">
+<title id="title">Selected saving channels in Rwanda: 2020 and 2024</title>
+<desc id="desc">Savings groups 55 to 52 percent; mobile money 22 to 20; commercial banks 21 to 18; Umurenge SACCO 22 to 14. Channels overlap.</desc>
+<rect width="1000" height="530" fill="#f6f8f2"/>
+<g font-family="Arial, sans-serif" fill="#193e34">
+<text x="32" y="42" font-size="25" font-weight="bold">Selected saving channels in Rwanda</text>
+<text x="32" y="70" font-size="16">Published adult-population estimates (%) · channels can overlap</text>
+<rect x="32" y="93" width="16" height="16" fill="#91b29d"/><text x="56" y="107" font-size="15">2020</text>
+<rect x="142" y="93" width="16" height="16" fill="#175d4b"/><text x="166" y="107" font-size="15">2024</text>
+<path d="M240 140 V440" stroke="#dce4dc"/>
+<text x="240" y="461" text-anchor="middle" font-size="13">0</text>
+<path d="M330 140 V440" stroke="#dce4dc"/>
+<text x="330" y="461" text-anchor="middle" font-size="13">10</text>
+<path d="M420 140 V440" stroke="#dce4dc"/>
+<text x="420" y="461" text-anchor="middle" font-size="13">20</text>
+<path d="M510 140 V440" stroke="#dce4dc"/>
+<text x="510" y="461" text-anchor="middle" font-size="13">30</text>
+<path d="M600 140 V440" stroke="#dce4dc"/>
+<text x="600" y="461" text-anchor="middle" font-size="13">40</text>
+<path d="M690 140 V440" stroke="#dce4dc"/>
+<text x="690" y="461" text-anchor="middle" font-size="13">50</text>
+<path d="M780 140 V440" stroke="#dce4dc"/>
+<text x="780" y="461" text-anchor="middle" font-size="13">60</text>
+<text x="32" y="175" font-size="16">Savings groups</text>
+<rect x="240" y="151" width="495" height="19" rx="3" fill="#91b29d"/>
+<text x="744" y="166" font-size="14">55%</text>
+<rect x="240" y="176" width="468" height="19" rx="3" fill="#175d4b"/>
+<text x="717" y="191" font-size="14">52%</text>
+<text x="838" y="176" font-size="16">-3 pp</text>
+<text x="32" y="248" font-size="16">Mobile money</text>
+<rect x="240" y="224" width="198" height="19" rx="3" fill="#91b29d"/>
+<text x="447" y="239" font-size="14">22%</text>
+<rect x="240" y="249" width="180" height="19" rx="3" fill="#175d4b"/>
+<text x="429" y="264" font-size="14">20%</text>
+<text x="838" y="249" font-size="16">-2 pp</text>
+<text x="32" y="321" font-size="16">Commercial banks</text>
+<rect x="240" y="297" width="189" height="19" rx="3" fill="#91b29d"/>
+<text x="438" y="312" font-size="14">21%</text>
+<rect x="240" y="322" width="162" height="19" rx="3" fill="#175d4b"/>
+<text x="411" y="337" font-size="14">18%</text>
+<text x="838" y="322" font-size="16">-3 pp</text>
+<text x="32" y="394" font-size="16">Umurenge SACCO</text>
+<rect x="240" y="370" width="198" height="19" rx="3" fill="#91b29d"/>
+<text x="447" y="385" font-size="14">22%</text>
+<rect x="240" y="395" width="126" height="19" rx="3" fill="#175d4b"/>
+<text x="375" y="410" font-size="14">14%</text>
+<text x="838" y="395" font-size="16">-8 pp</text>
+<text x="32" y="496" font-size="14">Source: AFR, FinScope 2024, Figure 35, printed p.45. Selected channels only.</text>
+<text x="32" y="518" font-size="13">Descriptive comparison; no significance tests or causal claims. pp = percentage points.</text>
+</g></svg>
